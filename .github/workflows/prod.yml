@@ -5,7 +5,7 @@ on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
     branches:
-      - master
+      - main
   pull_request:
     types:
       - closed
@@ -33,12 +33,12 @@ jobs:
           yarn build
 
       - name: 📂 Deploy to Server
-        uses: easingthemes/ssh-deploy@v4
+       uses: peaceiris/actions-gh-pages@v3
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           # ARGS: "-rltgoDzvO --delete"
-          SOURCE: 'dist/'
-          REMOTE_HOST: 192.34.62.123
-          REMOTE_USER: mantis
-          TARGET: public_html/free
-          EXCLUDE: '/build/, /node_modules/'
+          SOURCE: 'docs/'
+          # REMOTE_HOST: 192.34.62.123
+          # REMOTE_USER: mantis
+          # TARGET: public_html/free
+          # EXCLUDE: '/build/, /node_modules/'

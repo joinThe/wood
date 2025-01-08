@@ -25,6 +25,9 @@ export default defineConfig({
       }
     ]
   },
+  build: {
+    outDir: 'docs'
+  },
   server: {
     // this ensures that the browser opens upon server start
     open: true,

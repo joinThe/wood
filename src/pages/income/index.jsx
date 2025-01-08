@@ -19,6 +19,10 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import FSCertificate from './FSCertificate';
+import Vehicle from './Vehicle';
+import AdditionalExpenses from './AdditionalExpenses';
+import Type from './Type';
 // ==============================|| SAMPLE PAGE ||============================== //
 
 export default function Income() {
@@ -68,18 +72,15 @@ export default function Income() {
         </LocalizationProvider>
       </Box>
       <Box mt={6}>
-        <Typography variant="h5" gutterBottom>
-          Checkbox and Text Inputs
-        </Typography>
-        <Box sx={{ mt: 4, display: 'flex', alignItems: 'center', gap: 2, margin: 'auto' }}>
-          {' '}
-          <FormControlLabel control={<Checkbox checked={checked} onChange={(e) => setChecked(e.target.checked)} />} label="Check me" />
-          <TextField label="Input 1" value={textInput1} onChange={(e) => setTextInput1(e.target.value)} sx={{ mb: 2 }} />
-          <TextField label="Input 2" value={textInput2} onChange={(e) => setTextInput2(e.target.value)} sx={{ mb: 2 }} />
+        <FSCertificate />
+        <Vehicle />
+        <AdditionalExpenses />
+        <Type />
+        <Box mt={10}>
+          <Button variant="contained" onClick={handleSubmit}>
+            Відправити
+          </Button>
         </Box>
-        <Button variant="contained" onClick={handleSubmit}>
-          Submit
-        </Button>
       </Box>
     </MainCard>
   );

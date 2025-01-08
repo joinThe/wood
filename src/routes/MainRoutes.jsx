@@ -9,6 +9,7 @@ const Typography = Loadable(lazy(() => import('pages/component-overview/typograp
 const Shadow = Loadable(lazy(() => import('pages/component-overview/shadows')));
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard/index')));
 const Income = Loadable(lazy(() => import('pages/income/index')));
+const Home = Loadable(lazy(() => import('pages/home/index')));
 
 // render - sample page
 const Report = Loadable(lazy(() => import('pages/report/index')));
@@ -19,10 +20,10 @@ const MainRoutes = {
   path: '/',
   element: <Dashboard />,
   children: [
-    // {
-    //   path: '/',
-    //   element: <Income />
-    // },
+    {
+      path: '/',
+      element: <Home />
+    },
     {
       path: 'color',
       element: <Color />

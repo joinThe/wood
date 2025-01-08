@@ -11,25 +11,25 @@ const icons = {
 
 const pages = {
   id: 'authentication',
-  title: 'Authentication',
+  title: 'Авторизація',
   type: 'group',
   children: [
     {
       id: 'login1',
-      title: 'Login',
+      title: 'Вхід',
       type: 'item',
       url: '/login',
       icon: icons.LoginOutlined,
       target: true
-    },
-    {
-      id: 'register1',
-      title: 'Register',
-      type: 'item',
-      url: '/register',
-      icon: icons.ProfileOutlined,
-      target: true
     }
+    // {
+    //   id: 'register1',
+    //   title: 'Register',
+    //   type: 'item',
+    //   url: '/register',
+    //   icon: icons.ProfileOutlined,
+    //   target: true
+    // }
   ]
 };
 

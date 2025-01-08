@@ -1,26 +1,37 @@
 // assets
-import { DashboardOutlined } from '@ant-design/icons';
-
-// icons
-const icons = {
-  DashboardOutlined
-};
+import { ContainerOutlined, DownloadOutlined } from '@ant-design/icons';
 
 // ==============================|| MENU ITEMS - DASHBOARD ||============================== //
 
 const dashboard = {
   id: 'group-dashboard',
-  title: 'Navigation',
+  title: 'Документи',
   type: 'group',
   children: [
     {
-      id: 'dashboard',
-      title: 'Dashboard',
+      id: 'report',
+      title: 'Звіт',
       type: 'item',
-      url: '/dashboard/default',
-      icon: icons.DashboardOutlined,
+      url: '/report',
+      icon: ContainerOutlined,
+      breadcrumbs: false
+    },
+    {
+      id: 'income',
+      title: 'Прихід',
+      type: 'item',
+      url: '/income',
+      icon: DownloadOutlined,
       breadcrumbs: false
     }
+    // {
+    //   id: 'dashboard',
+    //   title: 'Dashboard',
+    //   type: 'item',
+    //   url: '/dashboard/default',
+    //   icon: icons.DashboardOutlined,
+    //   breadcrumbs: false
+    // }
   ]
 };
 

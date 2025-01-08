@@ -1,20 +1,23 @@
 import React, { useState } from 'react';
 import { Box, TextField, Select, MenuItem, Button, List, ListItem, ListItemText, Typography } from '@mui/material';
-// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-// import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-// import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-// import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+
+import MainCard from 'components/MainCard';
+
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
 // ==============================|| SAMPLE PAGE ||============================== //
 
-const sd = [];
-
-export default function SamplePage() {
+export default function Report() {
   const [items, setItems] = useState([]);
   const [textInput, setTextInput] = useState('');
+  const [groupTextInput, setGroupTextInput] = useState('');
   const [selectValue, setSelectValue] = useState('');
   const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedTime, setSelectedTime] = useState(null);
+  const [selectedStartTime, setSelectedStartTime] = useState(null);
+  const [selectedEndTime, setSelectedEndTime] = useState(null);
 
   const handleAddItem = () => {
     if (textInput.trim() && selectValue) {
@@ -25,28 +28,39 @@ export default function SamplePage() {
   };
 
   return (
-    <>
+    <MainCard title="Звіт">
       <Box>
-        {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
           <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
             <DatePicker
-              label="Select Date"
+              label="Дата"
               value={selectedDate}
               onChange={(newValue) => setSelectedDate(newValue)}
               renderInput={(params) => <TextField {...params} fullWidth />}
             />
             <TimePicker
-              label="Select Time"
-              value={selectedTime}
-              onChange={(newValue) => setSelectedTime(newValue)}
+              label="Час початку"
+              value={selectedStartTime}
+              onChange={(newValue) => setSelectedStartTime(newValue)}
               renderInput={(params) => <TextField {...params} fullWidth />}
+              ampm={false}
+            />
+            <TimePicker
+              label="Час кінця"
+              value={selectedEndTime}
+              onChange={(newValue) => setSelectedEndTime(newValue)}
+              renderInput={(params) => <TextField {...params} fullWidth />}
+              ampm={false}
             />
           </Box>
-        </LocalizationProvider> */}
+        </LocalizationProvider>
       </Box>
-      <Box sx={{ maxWidth: 400, margin: 'auto', mt: 4 }}>
+      <Box>
+        <TextField label="Бригада №" value={groupTextInput} onChange={(e) => setGroupTextInput(e.target.value)} />
+      </Box>
+      <Box sx={{ maxWidth: 400, mt: 4 }}>
         <Typography variant="h5" gutterBottom>
-          Add Items
+          Виконані роботи{' '}
         </Typography>
 
         <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
@@ -72,9 +86,10 @@ export default function SamplePage() {
           ))}
         </List>
       </Box>
-    </>
+    </MainCard>
   );
 }
+
 // export default function SamplePage() {
 //   return (
 //     <MainCard title="Sample Card">

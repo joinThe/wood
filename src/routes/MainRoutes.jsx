@@ -19,22 +19,13 @@ const MainRoutes = {
   path: '/',
   element: <Dashboard />,
   children: [
-    {
-      path: '/',
-      element: <DashboardDefault />
-    },
+    // {
+    //   path: '/',
+    //   element: <Income />
+    // },
     {
       path: 'color',
       element: <Color />
-    },
-    {
-      path: 'dashboard',
-      children: [
-        {
-          path: 'default',
-          element: <DashboardDefault />
-        }
-      ]
     },
     {
       path: 'report',
@@ -42,11 +33,8 @@ const MainRoutes = {
     },
     {
       path: 'income',
-      element: <Income />
-    },
-    {
-      path: 'shadow',
-      element: <Shadow />
+      element: <Income />,
+      default: true
     },
     {
       path: 'typography',

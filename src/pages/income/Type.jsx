@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Box, Typography, Select, MenuItem, FormControl, InputLabel, TextField, Button, Grid, Collapse } from '@mui/material';
+import Board from './types/Board';
+import Rail from './types/Rail';
+import Freza from './types/Freza';
 
 const WoodTypeSelect = () => {
   const [selectedItem, setSelectedItem] = useState('');
@@ -36,6 +39,8 @@ const WoodTypeSelect = () => {
             <MenuItem value="Фреза">Фреза</MenuItem>
             <MenuItem value="Кругляк">Кругляк</MenuItem>
             <MenuItem value="Дошка">Дошка</MenuItem>
+            <MenuItem value="Ламель">Ламель</MenuItem>
+            <MenuItem value="Рейка">Рейка</MenuItem>
           </Select>
         </FormControl>
 
@@ -48,7 +53,11 @@ const WoodTypeSelect = () => {
         <Box mt={2}>
           {items.map((item, index) => (
             <Box key={index} mb={2}>
-              <Typography variant="h6" gutterBottom>
+              {item.name=="Дошка"?<Board/>:null}
+              {item.name=="Рейка"?<Rail/>:null}
+              {item.name=="Фреза"?<Freza/>:null}
+
+              {/* <Typography variant="h6" gutterBottom>
                 {item.name}
               </Typography>
               <Grid container spacing={2}>
@@ -68,7 +77,7 @@ const WoodTypeSelect = () => {
                   </FormControl>
                 </Grid>
               </Grid>
-              <Typography variant="h6">{`та інше для "${item.name}"....`}</Typography>
+              <Typography variant="h6">{`та інше для "${item.name}"....`}</Typography> */}
             </Box>
           ))}
         </Box>

@@ -73,9 +73,9 @@ export default function Income() {
       </Box>
       <Box mt={6}>
         <FSCertificate />
+        <Type />
         <Vehicle />
         <AdditionalExpenses />
-        <Type />
         <Box mt={10}>
           <Button variant="contained" onClick={handleSubmit}>
             Відправити

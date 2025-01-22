@@ -3,6 +3,8 @@ import { Box, Typography, Select, MenuItem, FormControl, InputLabel, TextField, 
 import Board from './types/Board';
 import Rail from './types/Rail';
 import Freza from './types/Freza';
+import Circle from './types/Circle';
+import Lamel from './types/Lamel';
 
 const WoodTypeSelect = () => {
   const [selectedItem, setSelectedItem] = useState('');
@@ -53,9 +55,11 @@ const WoodTypeSelect = () => {
         <Box mt={2}>
           {items.map((item, index) => (
             <Box key={index} mb={2}>
-              {item.name=="Дошка"?<Board/>:null}
-              {item.name=="Рейка"?<Rail/>:null}
-              {item.name=="Фреза"?<Freza/>:null}
+              {item.name == 'Дошка' ? <Board /> : null}
+              {item.name == 'Рейка' ? <Rail /> : null}
+              {item.name == 'Фреза' ? <Freza /> : null}
+              {item.name == 'Кругляк' ? <Circle /> : null}
+              {item.name == 'Ламель' ? <Lamel /> : null}
 
               {/* <Typography variant="h6" gutterBottom>
                 {item.name}

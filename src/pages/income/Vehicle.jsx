@@ -10,7 +10,7 @@ const Vehicle = () => {
 
   return (
     <Box mt={5}>
-      <Typography variant="h5" gutterBottom>
+      <Typography variant="h4" gutterBottom>
         Транспорт
       </Typography>
       <Grid container spacing={2} alignItems="center">

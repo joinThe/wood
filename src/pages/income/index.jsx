@@ -23,6 +23,7 @@ import FSCertificate from './FSCertificate';
 import Vehicle from './Vehicle';
 import AdditionalExpenses from './AdditionalExpenses';
 import Type from './Type';
+import './borderStyle.css';
 // ==============================|| SAMPLE PAGE ||============================== //
 
 export default function Income() {

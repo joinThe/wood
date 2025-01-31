@@ -1,0 +1,13 @@
+@keyframes highlightBorder {
+  0% {
+    border: 2px solid blue;
+  }
+  100% {
+    border: 2px solid transparent;
+  }
+}
+
+.highlight {
+  animation: highlightBorder 2s ease-in-out;
+  border-radius: 8px;
+}

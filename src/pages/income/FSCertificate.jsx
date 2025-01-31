@@ -10,7 +10,7 @@ const FSCertificate = () => {
 
   return (
     <Box mt={5}>
-      <Typography variant="h5" gutterBottom>
+      <Typography variant="h4" gutterBottom>
         FSC
       </Typography>
       <FormControlLabel control={<Checkbox checked={isChecked} onChange={handleCheckboxChange} />} label="Сертифікат FSC" />

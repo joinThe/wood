@@ -11,7 +11,7 @@ const TypeWrapper = ({ children }) => {
   }, []);
 
   return (
-    <Grid container spacing={2} className="highlight" ref={myRef}>
+    <Grid container spacing={2} ml={1} className="highlight" ref={myRef}>
       {children}
       <Grid item xs={12}>
         <Divider variant="fullWidth" />

@@ -1,93 +1,110 @@
 import React, { useState } from 'react';
-import { Box, Typography, Select, MenuItem, TextField, Checkbox, Button, List, ListItem, ListItemText } from '@mui/material';
+import {
+  Typography,
+  Select,
+  MenuItem,
+  TextField,
+  Checkbox,
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  FormControlLabel
+} from '@mui/material';
+import Grid from '@mui/material/Unstable_Grid2';
+import TypeWrapper from './utils/TypeWrapper';
+import { updateItem, typesSignal } from './../signals';
 
-const Circle = () => {
-  const [listItems, setListItems] = useState([]);
-  const [newItem, setNewItem] = useState('');
-
+const Circle = (props) => {
+  const item = typesSignal.value[props.id];
+  const [type, setType] = useState('');
   const [pidsumok, setPidsumok] = useState('');
   const [summa, setSumma] = useState('');
   const [pdv, setPdv] = useState(false);
 
-  const handleAddItem = () => {
-    setListItems([...listItems, { pidsumok, summa, pdv }]);
+  const handleAddTtn = () => {
+    updateItem(item.id, 'ttnItems', { pidsumok, summa, pdv });
     setPidsumok('');
     setSumma('');
     setPdv(false);
   };
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: 2,
-        p: 2
-      }}
-    >
-      {/* Header */}
-      <Typography variant="h6">Кругляк</Typography>
-
-      {/* Select (Yellow) */}
-      <Select placeholder="Підвид" defaultValue="" variant="outlined" sx={{ width: '200px' }}>
-        <MenuItem value="option1">1</MenuItem>
-        <MenuItem value="option2">2</MenuItem>
-        <MenuItem value="option2">3</MenuItem>
-      </Select>
-
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 2,
-          flexWrap: 'wrap',
-          justifyContent: 'center'
-        }}
-      >
-        <TextField variant="outlined" onChange={(e) => setPidsumok(e.target.value)} label="Підсумок м3" sx={{ width: '150px' }} />
-        <TextField variant="outlined" onChange={(e) => setSumma(e.target.value)} label="Сумма" sx={{ width: '150px' }} />
-        <Checkbox
+    <TypeWrapper>
+      <Grid xs={12} item={'true'}>
+        <Typography variant="h5">Кругляк</Typography>
+        <Select
+          placeholder="Підвид"
+          value={type}
           onChange={(e) => {
-            console.log('🚀 ~ Circle ~ e.target.value:', e.target.value);
-            setPdv(e.target.value);
+            setType(e.target.value);
+            updateItem(item.id, 'subtype', e.target.value);
           }}
-          sx={{
-            width: '24px',
-            height: '24px',
-            p: 0
-          }}
+          variant="outlined"
+          sx={{ width: '200px' }}
+        >
+          <MenuItem value={1}>1</MenuItem>
+          <MenuItem value={2}>2</MenuItem>
+          <MenuItem value={3}>3</MenuItem>
+        </Select>
+      </Grid>
+      <Grid size={{ xs: 2, sm: 4, md: 4 }}>
+        <TextField
+          variant="outlined"
+          value={pidsumok}
+          onChange={(e) => setPidsumok(e.target.value)}
+          label="Підсумок м3"
+          sx={{ width: '150px' }}
         />
-        <Typography>зПДВ</Typography>
-        <Button onClick={handleAddItem} variant="contained" sx={{ color: 'white', width: '200px' }}>
+      </Grid>
+      <Grid size={{ xs: 2, sm: 4, md: 4 }}>
+        <TextField variant="outlined" value={summa} onChange={(e) => setSumma(e.target.value)} label="Сумма" sx={{ width: '150px' }} />
+      </Grid>
+      <Grid size={{ xs: 2, sm: 4, md: 4 }}>
+        <FormControlLabel control={<Checkbox checked={pdv} label={'21'} onChange={(e) => setPdv(e.target.checked)} />} label="зПДВ" />
+      </Grid>
+      <Grid size={{ xs: 2, sm: 4, md: 4 }}>
+        <Button onClick={handleAddTtn} variant="contained" sx={{ color: 'white', width: '200px' }}>
           Додати ТТН
         </Button>
-      </Box>
+      </Grid>
 
-      {/* List Section */}
-      {listItems.length ? (
-        <Box
-          sx={{
-            borderRadius: 1,
-            width: '100%',
-            p: 2
-          }}
-        >
-          <Typography>Список ТТН</Typography>
-          <List>
-            {listItems.map((item, index) => (
-              <ListItem key={index} sx={{ p: 0 }}>
-                <ListItemText primary={item.summa} />
-                <ListItemText primary={item.pidsumok} />
-                <Checkbox checked={item.pdv} />
-              </ListItem>
-            ))}
-          </List>
-        </Box>
-      ) : (
-        <></>
-      )}
-    </Box>
+      <Grid xs={12} item>
+        {item?.ttnItems?.length ? (
+          <TableContainer
+            sx={{
+              backgroundColor: '#f9f9f9'
+            }}
+            component={Paper}
+          >
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Підсумок м3</TableCell>
+                  <TableCell>Сумма</TableCell>
+                  <TableCell>ПДВ</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {item.ttnItems.map((item, index) => (
+                  <TableRow key={index}>
+                    <TableCell>{item.summa}</TableCell>
+                    <TableCell>{item.pidsumok}</TableCell>
+                    <TableCell>{item.pdv ? 'Так' : 'Ні'}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        ) : (
+          <></>
+        )}
+      </Grid>
+    </TypeWrapper>
   );
 };
 

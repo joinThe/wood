@@ -50,7 +50,7 @@ const AdditionalExpenses = () => {
 
   return (
     <Box mt={5}>
-      <Typography variant="h5" gutterBottom>
+      <Typography variant="h4" gutterBottom>
         Додаткові витрати
       </Typography>
       <FormControlLabel control={<Checkbox checked={isChecked} onChange={handleCheckboxChange} />} label="Додаткові витрати" />

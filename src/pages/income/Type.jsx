@@ -1,48 +1,51 @@
 import React, { useState } from 'react';
-import { Box, Typography, Select, MenuItem, FormControl, InputLabel, TextField, Button, Grid, Collapse } from '@mui/material';
+import { Box, Typography, Select, MenuItem, FormControl, InputLabel, Button, Collapse } from '@mui/material';
 import Board from './types/Board';
 import Rail from './types/Rail';
 import Freza from './types/Freza';
 import Circle from './types/Circle';
 import Lamel from './types/Lamel';
+import { addNewItem, typesSignal } from './signals';
+
+const menuItems = [
+  { value: 'freza', label: 'Фреза' },
+  { value: 'circle', label: 'Кругляк' },
+  { value: 'board', label: 'Дошка' },
+  { value: 'lamel', label: 'Ламель' },
+  { value: 'rail', label: 'Рейка' }
+];
 
 const WoodTypeSelect = () => {
   const [selectedItem, setSelectedItem] = useState('');
-  const [items, setItems] = useState([]);
-  const [woodType, setWoodType] = useState('');
-
-  const woodTypes = ['Дуб', 'Бук', 'Ясень']; // Підвиди типів дерева
+  const items = typesSignal.value;
 
   const handleSelectChange = (event) => {
     setSelectedItem(event.target.value);
   };
 
-  const handleWoodTypeChange = (event) => {
-    setWoodType(event.target.value);
-  };
-
   const handleAddItem = () => {
     if (selectedItem) {
-      setItems([...items, { name: selectedItem }]);
+      addNewItem(selectedItem);
+      // setItems([...items, { value: selectedItem, id: items.length }]);
+
       setSelectedItem('');
-      setWoodType('');
     }
   };
 
   return (
     <Box mt={5}>
-      <Typography variant="h5" gutterBottom>
+      <Typography variant="h4" gutterBottom>
         Вид
       </Typography>
       <Box>
         <FormControl fullWidth>
           <InputLabel>Виберіть тип</InputLabel>
           <Select value={selectedItem} onChange={handleSelectChange} label="Виберіть елемент">
-            <MenuItem value="Фреза">Фреза</MenuItem>
-            <MenuItem value="Кругляк">Кругляк</MenuItem>
-            <MenuItem value="Дошка">Дошка</MenuItem>
-            <MenuItem value="Ламель">Ламель</MenuItem>
-            <MenuItem value="Рейка">Рейка</MenuItem>
+            {menuItems.map(({ value, label }) => (
+              <MenuItem key={value} value={value}>
+                {label}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
 
@@ -53,35 +56,24 @@ const WoodTypeSelect = () => {
 
       <Collapse in={items.length > 0} timeout="auto" unmountOnExit>
         <Box mt={2}>
-          {items.map((item, index) => (
-            <Box key={index} mb={2}>
-              {item.name == 'Дошка' ? <Board /> : null}
-              {item.name == 'Рейка' ? <Rail /> : null}
-              {item.name == 'Фреза' ? <Freza /> : null}
-              {item.name == 'Кругляк' ? <Circle /> : null}
-              {item.name == 'Ламель' ? <Lamel /> : null}
-
-              {/* <Typography variant="h6" gutterBottom>
-                {item.name}
-              </Typography>
-              <Grid container spacing={2}>
-                <Grid item xs={6}>
-                  <TextField label="Обєм" variant="outlined" fullWidth value={item.volume} disabled />
-                </Grid>
-                <Grid item xs={6}>
-                  <FormControl fullWidth>
-                    <InputLabel>Тип дерева</InputLabel>
-                    <Select value={item.woodType} onChange={handleWoodTypeChange} label="Тип дерева" disabled>
-                      {woodTypes.map((woodType, idx) => (
-                        <MenuItem key={idx} value={woodType}>
-                          {woodType}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </Grid>
-              </Grid>
-              <Typography variant="h6">{`та інше для "${item.name}"....`}</Typography> */}
+          {items.map((item, i) => (
+            <Box key={i} mb={2}>
+              {(() => {
+                switch (item.value) {
+                  case 'board':
+                    return <Board id={i} />;
+                  case 'rail':
+                    return <Rail id={i} />;
+                  case 'freza':
+                    return <Freza id={i} />;
+                  case 'circle':
+                    return <Circle id={i} />;
+                  case 'lamel':
+                    return <Lamel id={i} />;
+                  default:
+                    return null;
+                }
+              })()}
             </Box>
           ))}
         </Box>
